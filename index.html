@@ -8,21 +8,62 @@
 </head>
 <body>
     <script>
-        let computerchoice = "string"
-        function getComputerChoice () {
+        let tempcomp = "string"
+        function getcomputerselection () {
             let comprand = (Math.floor(Math.random() * 3) + 1)
             if (comprand === 1) {
-                computerchoice = "rock"
+                tempcomp = "rock"
             } else if (comprand === 2) {
-                computerchoice = "paper"
+                tempcomp = "paper"
             } else {
-                computerchoice = "scissors"
+                tempcomp = "scissors"
             }
-            return computerchoice
+            return tempcomp
         }
 
-        getComputerChoice ();
-        console.log(computerchoice)
+        function playround(playerselection, computerselection){
+
+            if (playerselection === "rock"){
+                if (computerselection === "rock"){
+                    return "Draw, play again"
+                    
+                } else if (computerselection === "paper"){
+                    return "You Lose! Paper wraps up rock"
+                    
+                } else {
+                    return "You Win! Rock crushes scissors!"
+                }
+
+            } else if (playerselection === "paper"){
+                if (computerselection === "paper"){
+                    return "Draw, play again"
+                    
+                } else if (computerselection === "scissors"){
+                    return "You Lose! Scissors cuts paper"
+                    
+                } else {
+                    return "You Win! Paper wraps up rock!"
+                }
+
+            } else if (playerselection === "scissors"){
+                if (computerselection === "scissors"){
+                    return "Draw, play again"
+                    
+                } else if (computerselection === "rock"){
+                    return "You Lose! Rock crushes scissors"
+                
+                } else {
+                    return "You Win! Scissors cuts paper"
+                }
+
+            } else {
+                return "invalid selection"
+            }
+        }
+
+        const playerselection = "rock"
+        const computerselection = getcomputerselection();
+        console.log(playround(playerselection, computerselection));
     </script>
 </body>
 </html>
