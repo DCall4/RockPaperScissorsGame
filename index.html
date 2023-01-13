@@ -20,50 +20,71 @@
             }
             return tempcomp
         }
-
+        let state = "error"
         function playround(playerselection, computerselection){
 
             if (playerselection === "rock"){
                 if (computerselection === "rock"){
-                    return "Draw, play again"
+                    state = "Draw, play again"
+                    return state
                     
                 } else if (computerselection === "paper"){
-                    return "You Lose! Paper wraps up rock"
-                    
+                    state = "You Lose! Paper wraps up rock"
+                    return state
                 } else {
-                    return "You Win! Rock crushes scissors!"
+                    state = "You Win! Rock crushes scissors!"
+                    return state
                 }
 
             } else if (playerselection === "paper"){
                 if (computerselection === "paper"){
-                    return "Draw, play again"
+                    state = "Draw, play again"
+                    return state
                     
                 } else if (computerselection === "scissors"){
-                    return "You Lose! Scissors cuts paper"
-                    
+                    state = "You Lose! Scissors cuts paper"
+                    return state
                 } else {
-                    return "You Win! Paper wraps up rock!"
+                    state = "You Win! Paper wraps up rock!"
+                    return state
                 }
 
             } else if (playerselection === "scissors"){
                 if (computerselection === "scissors"){
-                    return "Draw, play again"
+                    state = "Draw, play again"
+                    return state
                     
                 } else if (computerselection === "rock"){
-                    return "You Lose! Rock crushes scissors"
+                    state = "You Lose! Rock crushes scissors"
+                    return state
                 
                 } else {
-                    return "You Win! Scissors cuts paper"
+                    state = "You Win! Scissors cuts paper"
+                    return state
                 }
 
             } else {
                 return "invalid selection"
             }
         }
+        let gameoutcome = "error"
+        let score = 0
+        function game() {
+            for (let i = 0; i < 5; i++) {
+                computerselection = getcomputerselection();
+                gameoutcome = playround (playerselection, computerselection);
+                console.log(state);
+                if (gameoutcome === "You Win! Rock crushes scissors!" || gameoutcome === "You Win! Scissors cuts paper" || gameoutcome === "You Win! Paper wraps up rock!") {
+                    score++;
+                } else {}
+
+            }
+            return score
+            
+        }
 
         const playerselection = "rock"
-        const computerselection = getcomputerselection();
-        console.log(playround(playerselection, computerselection));
+        console.log(game());
     </script>
 </body>
 </html>
