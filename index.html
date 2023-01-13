@@ -64,18 +64,26 @@
                 }
 
             } else {
-                return "invalid selection"
+                state = "invalid selection"
+                return state
             }
         }
         let gameoutcome = "error"
         let score = 0
+        let playerselection = "rock"
+        let playerinput = "rock"
         function game() {
             for (let i = 0; i < 5; i++) {
                 computerselection = getcomputerselection();
+                playerinput = prompt("Rock, Paper or Scissors?")
+                playerselection = playerinput.toLocaleLowerCase();
+                console.log(playerselection);
                 gameoutcome = playround (playerselection, computerselection);
                 console.log(state);
                 if (gameoutcome === "You Win! Rock crushes scissors!" || gameoutcome === "You Win! Scissors cuts paper" || gameoutcome === "You Win! Paper wraps up rock!") {
                     score++;
+                } else if (gameoutcome === "invalid selection") {
+                    i--
                 } else {}
 
             }
@@ -83,7 +91,7 @@
             
         }
 
-        const playerselection = "rock"
+        
         console.log(game());
     </script>
 </body>
