@@ -7,6 +7,11 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="container">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    </div>
     <script>
         let tempcomp = "string"
         function getcomputerselection () {
@@ -25,60 +30,83 @@
 
             if (playerselection === "rock"){
                 if (computerselection === "rock"){
-                    state = "Draw, play again"
-                    return state
-                    
+                    state = "Draw, play again"     
                 } else if (computerselection === "paper"){
                     state = "You Lose! Paper wraps up rock"
-                    return state
                 } else {
                     state = "You Win! Rock crushes scissors!"
-                    return state
                 }
-
             } else if (playerselection === "paper"){
                 if (computerselection === "paper"){
                     state = "Draw, play again"
-                    return state
                     
                 } else if (computerselection === "scissors"){
                     state = "You Lose! Scissors cuts paper"
-                    return state
                 } else {
                     state = "You Win! Paper wraps up rock!"
-                    return state
                 }
-
             } else if (playerselection === "scissors"){
                 if (computerselection === "scissors"){
                     state = "Draw, play again"
-                    return state
-                    
                 } else if (computerselection === "rock"){
                     state = "You Lose! Rock crushes scissors"
-                    return state
-                
                 } else {
                     state = "You Win! Scissors cuts paper"
-                    return state
                 }
-
             } else {
                 state = "invalid selection"
-                return state
             }
+            return state
         }
         let gameoutcome = "error"
         let score = 0
         let playerselection = "rock"
         let playerinput = "rock"
-        function game() {
-            for (let i = 0; i < 5; i++) {
+        const buttons = document.querySelectorAll('button');
+        const content = document.createElement('div');
+        const cont2 = document.createElement('div');
+        const container = document.querySelector('#container');
+        content.classList.add('content');
+        cont2.classList.add('cont2');
+// we use the .forEach method to iterate through each button
+       buttons.forEach((button) => {
+           //  and for each one we add a 'click' listener
+            button.addEventListener('click', () => {
+            playerselection = button.id;
+           content.textContent = playround(playerselection, getcomputerselection());
+           gameoutcome = state;
+            if (score === 5) {
+                button.disabled = true;
+                content.textContent = "Winner Winner!"
+            }
+           else if (gameoutcome === "You Win! Rock crushes scissors!" || gameoutcome === "You Win! Scissors cuts paper" || gameoutcome === "You Win! Paper wraps up rock!") {
+                    score++;
+                    
+                }
+            cont2.textContent = score;
+            if (score > 4) { 
+                cont2.textContent = "You Win! " + score;
+                button.disabled = true;
+            }
+            container.appendChild(content);
+            container.appendChild(cont2);
+                     
+        });
+       });
+      function game() {
+          for (let i = 0; i < 5; i++) {
                 computerselection = getcomputerselection();
-                playerinput = prompt("Rock, Paper or Scissors?")
-                playerselection = playerinput.toLocaleLowerCase();
+               // playerinput = playerselection
+               buttons.forEach((button) => {
+            // and for each one we add a 'click' listener
+                button.addEventListener('click', () => {
+                playerselection = button.id;
+                content.textContent = playround(playerselection, computerselection);
+                container.appendChild(content);           
+                 });
+                });
                 console.log(playerselection);
-                gameoutcome = playround (playerselection, computerselection);
+               // gameoutcome = playround (playerselection, computerselection);
                 console.log(state);
                 if (gameoutcome === "You Win! Rock crushes scissors!" || gameoutcome === "You Win! Scissors cuts paper" || gameoutcome === "You Win! Paper wraps up rock!") {
                     score++;
@@ -87,12 +115,12 @@
                 } else {}
 
             }
-            return score
+            
             
         }
 
         
-        console.log(game());
+    //    console.log(game());
     </script>
 </body>
 </html>
